@@ -1,0 +1,21 @@
+---
+
+- name: apply configuration to all nodes
+  hosts: all
+  remote_user: vagrant
+  tasks:
+    - name: echo something
+      command: echo "here"
+
+- name: deploy master
+  hosts: master
+  become: yes
+  roles:
+  - { role: 'kube', kube_apiserver_options: [{option: "--insecure-port", value: "8080"}] }
+
+- name: deploy nodes
+  hosts: node*
+  become: yes
+  roles:
+  - { role: 'kube', kube_type_of_node: 'wn', kube_server: master }
+

@@ -1,0 +1,3 @@
+[submodule "roles/kube"]
+	path = roles/kube
+	url = https://bigdata-memory@github.com/bigdata-memory/ansible-role-kubernetes.git
